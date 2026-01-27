@@ -14,8 +14,8 @@ export interface User extends Document{
     UserName:string,
     email:string,
     password:string,
-    Otp:string,
-    otpExpiry:Date,
+    Otp?:string,
+    otpExpiry?:Date,
     isVerified:boolean,
     AcceptMessages:boolean,
     messages:Messages[]
@@ -83,6 +83,6 @@ password: {
 
 // now making model for user
 
-const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('UserSchema' , UserSchema)
+const UserModel = (mongoose.models.User as mongoose.Model<User>) || mongoose.model<User>('User' , UserSchema)
 
 export default UserModel

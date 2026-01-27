@@ -1,0 +1,56 @@
+import { NextRequest, NextResponse } from "next/server";
+import { SignupSchema } from "@/src/Schemas/SignupSchema";
+import ConnectDb from "@/src/lib/db";
+import { resend } from "@/src/lib/resend";
+import UserModel from "@/src/models/User";
+
+import { generate6DigitOtp, hashOtp } from "@/src/helpers/otp";
+
+
+export async function POST(req:NextRequest){
+
+ try {
+       const body = await req.json()
+    const parse = SignupSchema.safeParse(body)
+    if(!parse.success){
+        return NextResponse.json(
+            {error:parse.error.flatten().fieldErrors},{status:400}
+        )
+    }
+
+    await ConnectDb()
+
+   
+
+    const {UserName , email , password } = parse.data
+  
+ const generate6Digit =  generate6DigitOtp()
+ const hashotp = hashOtp(generate6Digit)
+
+     await UserModel.create(
+        {
+            email , password , UserName , Otp:hashotp , otpExpiry: new Date(Date.now() + 2 * 60 * 1000),
+        }
+    )
+      await resend.emails.send({
+    from: process.env.EMAIL_FROM!,
+    to: email,
+    subject: "Your verification code",
+    html: `
+      <h2>Verify your email</h2>
+      <p>Your 6-digit code is:</p>
+      <h1 style="letter-spacing: 6px;">${generate6Digit}</h1>
+      <p>This code expires in 10 minutes.</p>
+    `,
+  });
+
+  let message: string = "OTP Send to your email plz verify it";
+
+  return NextResponse.json({ok:true , message})
+ } catch (error:unknown) {
+      const message =
+    error instanceof Error ? error.message : "Something went wrong";
+    return NextResponse.json({message} , {status:500})
+ }
+
+}
