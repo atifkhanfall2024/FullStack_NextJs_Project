@@ -53,16 +53,14 @@ const UserSchema:Schema<User> = new Schema({
 password: {
   type: String,
   required: [true, "Password Required"],
-  match: [
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    "Password should be strong"
-  ],
-},
+   trim: true
+}
+,
 
 
     Otp:{
         type:String ,
-        required:[true , "OTp is Required"]
+        
     },
     otpExpiry:{
         type:Date ,

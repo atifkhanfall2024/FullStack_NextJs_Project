@@ -4,6 +4,7 @@ import ConnectDb from "@/src/lib/db";
 import { resend } from "@/src/lib/resend";
 import UserModel from "@/src/models/User";
 import { HashOtp } from "@/src/helpers/hashpass";
+import { cookies } from "next/headers";
 
 import { generate6DigitOtp, hashOtp } from "@/src/helpers/otp";
 
@@ -26,7 +27,7 @@ export async function POST(req:NextRequest){
     const {UserName , email , password } = parse.data
   const Hashh = await HashOtp(password)
  const generate6Digit =  generate6DigitOtp()
- const hashotp = hashOtp(generate6Digit)
+ const hashotp = await hashOtp(generate6Digit)
 
      await UserModel.create(
         {
@@ -44,10 +45,21 @@ export async function POST(req:NextRequest){
       <p>This code expires in 10 minutes.</p>
     `,
   });
+// save email into cookies
+  
+  let message: string = "OTP Send to your email plz verify it in 2 minutes";
 
-  let message: string = "OTP Send to your email plz verify it";
+  const response = NextResponse.json({ok:true , message})
+    response .cookies.set("signupEmail", email, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 5 * 60, // 5 minutes
+  });
 
-  return NextResponse.json({ok:true , message})
+  return response
+
+
  } catch (error:unknown) {
       const message =
     error instanceof Error ? error.message : "Something went wrong";
