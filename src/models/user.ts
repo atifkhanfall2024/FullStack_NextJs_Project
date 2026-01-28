@@ -78,7 +78,7 @@ password: {
     } ,
     messages:[MessageSchema]
     
-})
+} , {timestamps:true})
 
 
 // now making model for user

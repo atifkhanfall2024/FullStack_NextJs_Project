@@ -3,6 +3,7 @@ import { SignupSchema } from "@/src/Schemas/SignupSchema";
 import ConnectDb from "@/src/lib/db";
 import { resend } from "@/src/lib/resend";
 import UserModel from "@/src/models/User";
+import { HashOtp } from "@/src/helpers/hashpass";
 
 import { generate6DigitOtp, hashOtp } from "@/src/helpers/otp";
 
@@ -23,13 +24,13 @@ export async function POST(req:NextRequest){
    
 
     const {UserName , email , password } = parse.data
-  
+  const Hashh = await HashOtp(password)
  const generate6Digit =  generate6DigitOtp()
  const hashotp = hashOtp(generate6Digit)
 
      await UserModel.create(
         {
-            email , password , UserName , Otp:hashotp , otpExpiry: new Date(Date.now() + 2 * 60 * 1000),
+            email , password:Hashh , UserName , Otp:hashotp , otpExpiry: new Date(Date.now() + 2 * 60 * 1000),
         }
     )
       await resend.emails.send({

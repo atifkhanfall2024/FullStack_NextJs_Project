@@ -8,7 +8,7 @@ const ConnectDb:()=>Promise<void> = async()=>{
     }
 
     if(mongoose.connection.readyState === 1){
-        console.log('Database Already COnnected');
+        console.log('Database Already Connected');
         return
     }
 
