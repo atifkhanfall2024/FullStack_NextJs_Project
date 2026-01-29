@@ -16,9 +16,9 @@ try {
  
      await ConnectDb()
 
-    const {Otp} = parse.data
+    const {Otp , email} = parse.data
 
-    const email = req.cookies.get("signupEmail")?.value
+//const email = req.cookies.get("signupEmail")?.value
     //console.log(email);
 
     // now first this email into database
@@ -27,6 +27,10 @@ try {
         return NextResponse.json({message:"User Not Found"} , { status: 404 })
     }
 
+    if(user.otpExpiry && user.otpExpiry < new Date()){
+    return NextResponse.json({ message: "Otp Expired" }, { status: 400 });
+}
+
     // if have user then verify his otp 
     const verifyOtp = await Compare(Otp , user.Otp)
 
@@ -34,7 +38,8 @@ try {
           return NextResponse.json({message:"Otp Not Match"} , { status: 404 })
     }
 
-    user.Otp =''
+    user.Otp =undefined
+    //user.otpExpiry=undefined
     user.isVerified=true
     await user.save()
 

@@ -49,15 +49,15 @@ export async function POST(req:NextRequest){
   
   let message: string = "OTP Send to your email plz verify it in 2 minutes";
 
-  const response = NextResponse.json({ok:true , message})
-    response .cookies.set("signupEmail", email, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 5 * 60, // 5 minutes
-  });
+  return  NextResponse.json({ok:true , message})
+  //   response .cookies.set("signupEmail", email, {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === "production",
+  //   sameSite: "lax",
+  //   maxAge: 5 * 60, // 5 minutes
+  // });
 
-  return response
+  
 
 
  } catch (error:unknown) {
