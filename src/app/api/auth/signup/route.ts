@@ -31,7 +31,7 @@ export async function POST(req:NextRequest){
 
      await UserModel.create(
         {
-            email , password:Hashh , UserName , Otp:hashotp , otpExpiry: new Date(Date.now() + 2 * 60 * 1000),
+            email , password:Hashh , UserName , Otp:hashotp , otpExpiry: new Date(Date.now() + 2 * 60 * 1000) , messages:[],
         }
     )
       await resend.emails.send({
