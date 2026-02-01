@@ -1,10 +1,10 @@
 import { NextRequest , NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-
-export function middleware(req:NextRequest){
+export async function middleware(req:NextRequest){
 
     // here i took token
-const token = req.cookies.get('token')?.value
+const token = await getToken({req:req})
 const pathname = req.nextUrl.pathname
 
  if (token && (pathname.startsWith("/login") || pathname.startsWith("/signup") || pathname.startsWith('/verify')|| pathname.startsWith('/resend-otp')))  {

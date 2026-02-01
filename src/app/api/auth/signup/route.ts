@@ -4,7 +4,7 @@ import ConnectDb from "@/src/lib/db";
 import { resend } from "@/src/lib/resend";
 import UserModel from "@/src/models/User";
 import { HashOtp } from "@/src/helpers/hashpass";
-import { cookies } from "next/headers";
+
 
 import { generate6DigitOtp, hashOtp } from "@/src/helpers/otp";
 
