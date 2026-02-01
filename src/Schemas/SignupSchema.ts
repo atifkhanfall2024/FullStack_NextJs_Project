@@ -1,6 +1,6 @@
 import {z} from 'zod'
 
-export const UserNames = z.string().min(3 , 'Name Must Be At least 3 Characters').max(20 , 'Name Must be less than 20 Character')
+export const UserNames = z.string().min(3 , 'Name Must Be At least 3 Characters').max(20 , 'Name Must be less than 20 Character').trim()
 
 export const emails  = z.string().email({message:"Incorrect Email Format"})
 
