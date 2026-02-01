@@ -12,7 +12,7 @@ export async function GET(req:NextRequest){
       //console.log(searchParams); 
 
        const UserName = searchParams.get('UserName')
-
+      //  UserName?.toLowerCase()
        if(!UserName){
            return NextResponse.json(
         { message: "UserName query param is required" },
@@ -20,7 +20,7 @@ export async function GET(req:NextRequest){
       );
        }
 
-       //console.log(UserName);
+      // console.log(UserName);
     const parse = UserNames.safeParse(UserName)
 
     if(!parse.success){
