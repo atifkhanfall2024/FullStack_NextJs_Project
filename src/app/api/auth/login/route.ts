@@ -3,6 +3,7 @@ import { SigninSchema } from '@/src/Schemas/SigninSchema'
 import {NextRequest, NextResponse} from 'next/server'
 import { Compare } from '@/src/helpers/hashpass'
 import ConnectDb from '@/src/lib/db'
+import { SignIntoken } from '@/src/helpers/Signjwt_and_Verifytoken'
 
 export async function POST(req:NextRequest){
 
@@ -37,7 +38,20 @@ if(!checkPass){
     return NextResponse.json({ message: "Invalid Credantials" } , {status:401});
 }
 
-return NextResponse.json({message:"User Login Success" , user} , {status:200})
+// setup of cookies
+
+const token = await SignIntoken({_id:user._id , UserName:user.UserName , isVerfied:user.isVerified , AcceptMessages:user.AcceptMessages})
+
+const res =  NextResponse.json({message:"User Login Success" , user} , {status:200})
+res.cookies.set('token' , token , {
+    httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24 * 7,
+})
+
+return res
 
     
 } catch (error) {

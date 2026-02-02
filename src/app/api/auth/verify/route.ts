@@ -16,10 +16,10 @@ try {
  
      await ConnectDb()
 
-    const {Otp , email} = parse.data
+    const {Otp} = parse.data
 
-//const email = req.cookies.get("signupEmail")?.value
-    //console.log(email);
+const email = req.cookies.get("signupEmail")?.value
+    console.log(email);
 
     // now first this email into database
     const user = await UserModel.findOne({email})
