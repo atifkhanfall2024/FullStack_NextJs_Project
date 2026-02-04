@@ -40,7 +40,7 @@ if(!checkPass){
 
 // setup of cookies
 
-const token = await SignIntoken({_id:user._id , UserName:user.UserName , isVerfied:user.isVerified , AcceptMessages:user.AcceptMessages})
+const token = await SignIntoken({id:user._id.toString() , UserName:user.UserName , isVerfied:user.isVerified , AcceptMessages:user.AcceptMessages})
 
 const res =  NextResponse.json({message:"User Login Success" , user} , {status:200})
 res.cookies.set('token' , token , {
