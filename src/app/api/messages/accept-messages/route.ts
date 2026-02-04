@@ -68,7 +68,7 @@ export async function GET(req:NextRequest){
          return NextResponse.json({message:'User Not Found'} , {status:404})
     }
 
-    return NextResponse.json({message:user.AcceptMessages})
+    return NextResponse.json({message:user.AcceptMessages},{status:200})
 
     } catch (error) {
         return NextResponse.json({messgae:"Something went Wrong"} , {status:400})
