@@ -18,7 +18,7 @@ export async function GET(req:NextRequest){
 
     const uid = UserData?.id
    
-    console.log(uid);
+    //console.log(uid);
 
     // now using agreegation to take messages from user document
 
