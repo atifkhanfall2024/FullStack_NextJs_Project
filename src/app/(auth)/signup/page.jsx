@@ -7,7 +7,7 @@ export default function SignupPage() {
 const [userName , setuserName] = useState('')
 const [email , setEmail] = useState('')
 const [password , setPassword] = useState('')
-
+const [error , setError] = useState({})
 
 const HandleSignup = async(e)=>{
              e.preventDefault()
@@ -15,8 +15,9 @@ const HandleSignup = async(e)=>{
          const res = await axios.post('/api/signup' , {
           UserName:userName  , email , password
          } , {withCredentials:true})
-         console.log(res.data.message);
+         console.log(res?.data?.message);
              }catch(err){
+               setError(err?.response?.data?.error);
                  console.log(err);
              }
 }
@@ -108,6 +109,15 @@ const HandleSignup = async(e)=>{
                       className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
                     />
                   </div>
+  {error && Object.keys(error).length > 0 && (
+  <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 space-y-1">
+    {Object.entries(error).flatMap(([field, msgs]) =>
+      (msgs || []).map((msg, i) => (
+        <p key={`${field}-${i}`}>{msg}</p>
+      ))
+    )}
+  </div>
+)}
 
                   <button
                     type="button"
