@@ -1,6 +1,6 @@
 import { AuthUser } from "@/src/helpers/authuser";
 import ConnectDb from "@/src/lib/db";
-import { model } from "mongoose";
+
 import { NextRequest, NextResponse } from "next/server";
 
 import { streamText } from "ai";
