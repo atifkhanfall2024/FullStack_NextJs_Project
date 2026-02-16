@@ -28,7 +28,7 @@ if (!user ) {
 
 
 if (user.isVerified === false) { 
- return NextResponse.json({message:'please verify email First'} , {status:200})
+ return NextResponse.json({message:'please verify email First'} , {status:401})
 }
 
 // now also comparing passward for login

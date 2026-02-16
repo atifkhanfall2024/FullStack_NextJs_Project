@@ -5,6 +5,7 @@ import axios from 'axios'
 import {useRouter} from 'next/navigation'
 import {toast} from 'react-toastify'
 import {ClipLoader} from 'react-spinners'
+import Link from 'next/link'
 export default function SignupPage() {
 
 const [userName , setuserName] = useState('')
@@ -123,7 +124,7 @@ const HandleSignup = async(e)=>{
                       className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
                     />
                   </div>
-  {error && Object.keys(error).length > 0 && (
+  {/* {error && Object.keys(error).length > 0 && (
   <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 space-y-1">
     {Object.entries(error).flatMap(([field, msgs]) =>
       (msgs || []).map((msg, i) => (
@@ -131,7 +132,7 @@ const HandleSignup = async(e)=>{
       ))
     )}
   </div>
-)}
+)} */}
 
                   <button
                     type="button"
@@ -142,12 +143,9 @@ const HandleSignup = async(e)=>{
 
                   <p className="pt-2 text-center text-sm text-slate-700">
                     Already a member?{" "}
-                    <a
-                      href="#"
-                      className="font-semibold text-blue-600 hover:underline"
-                    >
-                      Sign in
-                    </a>
+                  
+                     {<Link href='/login' > Sign in</Link>} 
+                    
                   </p>
                 </form>
 

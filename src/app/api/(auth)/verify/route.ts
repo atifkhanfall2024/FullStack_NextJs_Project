@@ -17,8 +17,10 @@ try {
      await ConnectDb()
 
     const {Otp} = parse.data
+ const cookie = await cookies()
+const email = cookie.get("signupEmail")?.value
+console.log("all cookies:", cookie.getAll());
 
-const email = req.cookies.get("signupEmail")?.value
     console.log(email);
 
     // now first this email into database

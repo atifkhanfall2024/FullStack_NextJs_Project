@@ -1,0 +1,163 @@
+'use client';
+import axios from "axios";
+import Link from "next/link";
+import { useState } from "react";
+import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
+export default function LoginPage() {
+
+
+    const [email , setEmail] = useState('')
+    const [password , setPassword] = useState('')
+    const [loading , setLoading] = useState(false)
+
+
+    const HandleLogin = async(e)=>{
+
+        e.preventDefault()
+        setLoading(true)
+        try {
+            
+            const res = await axios.post('/api/login' , {email , password} , {withCredentials:true})
+            console.log(res?.data?.message);
+            toast.success('User Login Success')
+        } catch (error) {
+     setLoading(false)
+        let errors = error?.response?.data?.message || error?.response?.data?.error
+        toast.error(errors)
+        console.log(errors);
+        }
+    }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white px-4 py-12">
+      <div className="mx-auto w-full max-w-5xl">
+        <div className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-black/5">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* LEFT: Info panel */}
+            <div className="relative hidden lg:flex flex-col justify-between bg-slate-900 p-10">
+              <div>
+                <p className="text-sm font-medium text-white/70">Welcome back</p>
+                <h1 className="mt-3 text-4xl font-extrabold tracking-tight text-white">
+                  Login to Mystery
+                </h1>
+                <p className="mt-3 max-w-sm text-sm text-white/70">
+                  Sign in to continue and see your anonymous messages securely.
+                </p>
+              </div>
+
+              <div className="mt-10 rounded-2xl bg-white/10 p-5 ring-1 ring-white/10">
+                <p className="text-sm text-white/80">
+                  Tip: Use a strong password and never share your login details.
+                </p>
+              </div>
+            </div>
+
+            {/* RIGHT: Form panel */}
+            <div className="flex items-center justify-center p-6 sm:p-10">
+              <div className="w-full max-w-md">
+                <div className="text-center lg:text-left">
+                  <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                    Sign in
+                  </h2>
+                  <p className="mt-2 text-sm text-slate-600">
+                    Enter your email and password to continue.
+                  </p>
+                </div>
+
+                <div className="mt-8 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
+                  <form className="space-y-5">
+                    {/* Email */}
+                    <div className="space-y-2">
+                      <label className="text-sm font-semibold text-slate-900">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={(e)=>setEmail(e.target.value)}
+                        placeholder="you@example.com"
+                        className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
+                      />
+                    </div>
+
+                    {/* Password */}
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <label className="text-sm font-semibold text-slate-900">
+                          Password
+                        </label>
+                        <a
+                          href="#"
+                          className="text-xs font-semibold text-blue-600 hover:underline"
+                        >
+                          Forgot password?
+                        </a>
+                      </div>
+
+                      <input
+                        type="password"
+                        placeholder="••••••••"
+                          value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                        className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
+                      />
+                    </div>
+
+                    {/* Button */}
+                    <button
+                      type="button"
+                      className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.99]" onClick={HandleLogin} disabled={loading}
+                    >
+                     {loading?<ClipLoader color="#fff" size={20} /> : 'Login'}
+                    </button>
+
+                    {/* Divider */}
+                    <div className="relative py-2">
+                      <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-slate-200" />
+                      </div>
+                      <div className="relative flex justify-center">
+                        <span className="bg-white px-3 text-xs text-slate-500">
+                          OR
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Social buttons (UI only) */}
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                      <button
+                        type="button"
+                        className="inline-flex h-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-900 transition hover:bg-slate-50 active:scale-[0.99]"
+                      >
+                        Continue with Google
+                      </button>
+                      <button
+                        type="button"
+                        className="inline-flex h-11 items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-900 transition hover:bg-slate-50 active:scale-[0.99]"
+                      >
+                        Continue with GitHub
+                      </button>
+                    </div>
+
+                    {/* Footer */}
+                    <p className="pt-2 text-center text-sm text-slate-700">
+                      Don&apos;t have an account?{" "}
+                    
+                         {<Link href='/signup' > Sign up</Link>} 
+                  
+                    </p>
+                  </form>
+                </div>
+
+                <p className="mt-6 text-center text-xs text-slate-500">
+                  By signing in, you agree to our Terms & Privacy Policy.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

@@ -1,20 +1,30 @@
 'use client'
 import axios from "axios";
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 export default function OtpPage() {
 
 const [Otp , setOtp] = useState([])
+const [loading , setLoading] = useState(false)
 console.log('my otp' , Otp);
 const VerifyOtp = async(e)=>{
              e.preventDefault()
+             setLoading(true)
     try {
         const res = await axios.post('/api/verify' ,{
             Otp:Otp.join("") 
     } , {withCredentials:true})
-    console.log(res.data);
+    toast.success(res?.data?.message)
+
+   // console.log(res.data);
     } catch (error) {
-        console.log(error);
+
+        setLoading(false)
+        let errors = error?.response?.data?.message || error?.response?.data?.error
+        toast.error(errors)
+        console.log(errors);
     }
 }
 
@@ -87,9 +97,9 @@ const VerifyOtp = async(e)=>{
                   <div className="mt-6 space-y-3">
                     <button
                       type="button"
-                      className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.99]"  onClick={VerifyOtp}
+                      className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.99]"  onClick={VerifyOtp} disabled={loading}
                     >
-                      Verify
+                     {loading ? <ClipLoader color="#fff" size={20} />: 'Verify'} 
                     </button>
 
                     <button
