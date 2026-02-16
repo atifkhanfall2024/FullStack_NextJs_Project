@@ -2,23 +2,37 @@
 import Image from "next/image";
 import { useState } from "react";
 import axios from 'axios'
+import {useRouter} from 'next/navigation'
+import {toast} from 'react-toastify'
+import {ClipLoader} from 'react-spinners'
 export default function SignupPage() {
 
 const [userName , setuserName] = useState('')
 const [email , setEmail] = useState('')
 const [password , setPassword] = useState('')
 const [error , setError] = useState({})
-
+const [loading , setLoading] = useState(false)
+const router = useRouter()
 const HandleSignup = async(e)=>{
              e.preventDefault()
+               setLoading(true)
              try{
+            
          const res = await axios.post('/api/signup' , {
           UserName:userName  , email , password
          } , {withCredentials:true})
+           toast.success(res?.data?.message)
          console.log(res?.data?.message);
+       
+         
+          router.push(`/VerifyOtp`)
+          
              }catch(err){
-               setError(err?.response?.data?.error);
-                 console.log(err);
+               setLoading(false);
+  setError(err?.response?.data?.error || { general: ["Something went wrong"] });
+
+  const first = Object.values(err?.response?.data?.error || {})?.[0]?.[0];
+  toast.error(first || "Something went wrong");
              }
 }
 
@@ -121,9 +135,9 @@ const HandleSignup = async(e)=>{
 
                   <button
                     type="button"
-                    className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.99]" onClick={HandleSignup}
+                    className="inline-flex h-11 w-full items-center justify-center rounded-lg bg-slate-900 text-sm font-semibold text-white shadow-sm transition hover:bg-slate-800 active:scale-[0.99]" onClick={HandleSignup} disabled={loading}
                   >
-                    Create account
+                    {loading ? <ClipLoader color="#fff" size={20} /> :  'Create account'}
                   </button>
 
                   <p className="pt-2 text-center text-sm text-slate-700">
