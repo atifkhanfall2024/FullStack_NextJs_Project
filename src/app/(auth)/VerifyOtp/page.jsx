@@ -3,12 +3,14 @@ import axios from "axios";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function OtpPage() {
 
 const [Otp , setOtp] = useState([])
 const [loading , setLoading] = useState(false)
 console.log('my otp' , Otp);
+const router = useRouter()
 const VerifyOtp = async(e)=>{
              e.preventDefault()
              setLoading(true)
@@ -17,7 +19,7 @@ const VerifyOtp = async(e)=>{
             Otp:Otp.join("") 
     } , {withCredentials:true})
     toast.success(res?.data?.message)
-
+     router.push('/login')
    // console.log(res.data);
     } catch (error) {
 
@@ -104,7 +106,7 @@ const VerifyOtp = async(e)=>{
 
                     <button
                       type="button"
-                      className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-900 transition hover:bg-slate-50 active:scale-[0.99]"
+                      className="inline-flex h-11 w-full items-center justify-center rounded-lg border border-slate-200 bg-white text-sm font-semibold text-slate-900 transition hover:bg-slate-50 active:scale-[0.99]" onClick={()=>router.push('/resend')}
                     >
                       Resend code
                     </button>

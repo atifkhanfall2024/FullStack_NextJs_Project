@@ -4,9 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
+import { FaArrowLeft } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
 
-
+   const router = useRouter()
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
     const [loading , setLoading] = useState(false)
@@ -21,6 +24,7 @@ export default function LoginPage() {
             const res = await axios.post('/api/login' , {email , password} , {withCredentials:true})
             console.log(res?.data?.message);
             toast.success('User Login Success')
+            router.push('/dashboard')
         } catch (error) {
      setLoading(false)
         let errors = error?.response?.data?.message || error?.response?.data?.error
@@ -57,6 +61,7 @@ export default function LoginPage() {
             <div className="flex items-center justify-center p-6 sm:p-10">
               <div className="w-full max-w-md">
                 <div className="text-center lg:text-left">
+                    <Link href={'/signup'}><p className="-translate-y-5 text-xl"><FaArrowLeft/></p></Link>
                   <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
                     Sign in
                   </h2>
@@ -103,7 +108,12 @@ export default function LoginPage() {
                         className="h-11 w-full rounded-lg border border-slate-200 bg-white px-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-slate-400 focus:ring-4 focus:ring-slate-100"
                       />
                     </div>
-
+                      <a
+                          href="/VerifyOtp"
+                          className="text-xs my-5 font-semibold text-blue-600 hover:underline"
+                        >
+                          Verify Account?
+                        </a>
                     {/* Button */}
                     <button
                       type="button"

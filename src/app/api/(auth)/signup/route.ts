@@ -52,7 +52,7 @@ export async function POST(req:NextRequest){
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 10 * 60, // 10 minutes
+    maxAge: 2 * 60, // 10 minutes
   });
 
   return response

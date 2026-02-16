@@ -49,10 +49,17 @@ export async function POST(req: NextRequest) {
       `,
     });
 
-    return NextResponse.json({
-      ok: true,
-      message: "New OTP sent to your email",
-    });
+    let message: string = "OTP Send to your email plz verify it in 2 minutes";
+
+  const response =   NextResponse.json({ok:true , message})
+    response .cookies.set("signupEmail", email, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+    maxAge: 10 * 60, // 10 minutes
+  });
+
+  return response
 
   } catch (error: unknown) {
     const message =

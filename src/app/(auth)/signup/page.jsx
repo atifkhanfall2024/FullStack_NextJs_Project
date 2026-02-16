@@ -1,10 +1,11 @@
 'use client'
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from 'axios'
 import {useRouter} from 'next/navigation'
 import {toast} from 'react-toastify'
 import {ClipLoader} from 'react-spinners'
+import { FaArrowLeft } from "react-icons/fa";
 import Link from 'next/link'
 export default function SignupPage() {
 
@@ -13,7 +14,35 @@ const [email , setEmail] = useState('')
 const [password , setPassword] = useState('')
 const [error , setError] = useState({})
 const [loading , setLoading] = useState(false)
+const [Username , setName] = useState('')
 const router = useRouter()
+
+
+useEffect(()=>{
+
+  if(!userName){
+    setName("")
+    return
+  }
+
+  const timer = setTimeout(async()=>{
+
+   try {
+     const res = await axios.get(`/api/UniqueNameCheck?UserName=${userName}` , {withCredentials:true})
+     toast.success(res?.data?.message || "Username is available")
+     console.log(res?.data?.message);
+   } catch (error) {
+    
+    console.log(error?.response?.data?.message ||error?.response?.data?.error );
+    toast.error(error?.response?.data?.message ||error?.response?.data?.error|| "Username already taken")
+   }
+
+  } , 6000)
+
+return () => clearTimeout(timer);
+} , [userName])
+
+
 const HandleSignup = async(e)=>{
              e.preventDefault()
                setLoading(true)

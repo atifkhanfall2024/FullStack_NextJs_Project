@@ -54,8 +54,8 @@ export async function middleware(req: NextRequest) {
     isLoggedIn &&
     (pathname.startsWith("/login") ||
       pathname.startsWith("/signup") ||
-      pathname.startsWith("/verify") ||
-      pathname.startsWith("/resend-otp"))
+      pathname.startsWith("/VerifyOtp") ||
+      pathname.startsWith("/resend"))
   ) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
