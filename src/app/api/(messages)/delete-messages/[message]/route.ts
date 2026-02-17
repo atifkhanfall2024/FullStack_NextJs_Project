@@ -9,11 +9,16 @@ export async function DELETE(req:NextRequest ,   { params }: { params: Promise<{
         
         const {message} = await params
 
-
+       if (!mongoose.isValidObjectId(new mongoose.Types.ObjectId(message))) {
+      return NextResponse.json({ message: "Invalid user id" }, { status: 400 });
+    }
 
         // first we need to check that the user is authenticated or not
      const user = await AuthUser(req)
      const uid = (user as any ).id
+      if (!mongoose.isValidObjectId(new mongoose.Types.ObjectId(uid))) {
+      return NextResponse.json({ message: "Invalid user id" }, { status: 400 });
+    }
      console.log(uid);
      console.log("messageid:", message);
 

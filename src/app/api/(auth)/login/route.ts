@@ -56,6 +56,7 @@ return res
     
 } catch (error) {
     let message  = 'Something went Wrong'
+     console.error("LOGIN ERROR:", error); 
     error instanceof Error ? error.message : message
        return NextResponse.json({message} , {status:500})
 }
