@@ -7,7 +7,7 @@ export default function Navbar() {
 
     const [User , setUser] = useState(null)
    const route = useRouter()
-   
+
     // calling logout api 
 const HandleLogout = async(e)=>{
     e.preventDefault()
@@ -39,7 +39,7 @@ const HandleLogout = async(e)=>{
             MM
           </div>
           <span className="text-base font-semibold tracking-wide text-white">
-            {`Welcome , ${User?.UserName || 'To Mystry Messages'}`}
+            {`Welcome ${User?.UserName || 'To Mystry Messages'}`}
           </span>
         </a>
 
@@ -64,7 +64,7 @@ const HandleLogout = async(e)=>{
             Discover
           </a>
           <a
-            href="/about"
+            href="/dashboard/about"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/5 hover:text-white"
           >
             About
