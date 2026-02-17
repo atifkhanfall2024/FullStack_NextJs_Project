@@ -1,34 +1,66 @@
-'use client'
-export default function DashboardCard({ title = "Dashboard Card", children }) {
+"use client";
+import { useState } from "react";
+import { IoClose } from "react-icons/io5";
+
+export default function DashboardCard({ message, onConfirmDelete }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="min-h-[calc(100vh-80px)] w-full flex items-center justify-center px-4">
-      <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-slate-950/50 p-6 shadow-lg backdrop-blur sm:p-8">
-        <div className="flex items-start justify-between gap-4">
-          <h2 className="text-lg font-semibold text-white sm:text-xl">{title}</h2>
-          <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-200">
-            Dashboard
-          </span>
-        </div>
+    <div className="relative w-full max-w-sm">
+      {/* Card */}
+      <div className="rounded-xl border border-white/10 bg-slate-950/60 p-4 shadow hover:bg-black transition">
+        {/* Top row */}
+        <div className="flex items-start justify-between gap-2">
+          <p className="text-xl font-medium text-white line-clamp-2">
+            {message?.Context || "No content"}
+          </p>
 
-        <div className="mt-5 text-sm leading-relaxed text-slate-300">
-          {children ? (
-            children
-          ) : (
-            <p>
-              Put your dashboard content here (stats, buttons, recent messages, etc.).
-            </p>
-          )}
-        </div>
-
-        <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
-          <button className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white hover:bg-white/10">
-            Secondary
-          </button>
-          <button className="rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white hover:opacity-95">
-            Primary
+          <button
+            onClick={() => setOpen(true)}
+            className="text-slate-400 hover:text-red-500"
+            aria-label="Delete"
+          >
+            <IoClose size={28} />
           </button>
         </div>
+
+        {/* Date */}
+        <p className="mt-2 text-xs text-green-400">
+          {message?.CreatedAt
+            ? new Date(message.CreatedAt).toLocaleString()
+            : "Just now"}
+        </p>
       </div>
+
+      {/* Small popup */}
+      {open && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center">
+          <div className="w-full max-w-xs rounded-xl border border-white/10 bg-slate-900 p-4 shadow-lg">
+            <p className="text-sm text-white">
+              Do you really want to delete?
+            </p>
+
+            <div className="mt-4 flex justify-end gap-2">
+              <button
+                onClick={() => setOpen(false)}
+                className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-white hover:bg-white/10"
+              >
+                Cancel
+              </button>
+
+              <button
+                onClick={() => {
+                  setOpen(false);
+                  onConfirmDelete?.(message); // 👈 your logic will go here
+                }}
+                className="rounded-lg bg-red-500 px-3 py-1.5 text-xs text-white hover:bg-red-600"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
