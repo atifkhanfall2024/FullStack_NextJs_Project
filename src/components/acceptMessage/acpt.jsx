@@ -2,11 +2,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-
 export default function AcceptMessages() {
   const [on, setOn] = useState(false);
   const [loading, setLoading] = useState(true); // for initial load
-
+   
   // ✅ Load current status from backend
   useEffect(() => {
     const loadStatus = async () => {
@@ -52,17 +51,21 @@ export default function AcceptMessages() {
   }
 
   return (
+     <>
+      <div><p className="text-black -translate-y-[200%] ml-[3%] text-[110%]">Accepting Message:{on}</p></div>
     <button
       type="button"
       onClick={() => updateStatus(!on)}
-      className="relative w-28 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden"
-    >
+      className="relative w-25 h-10 rounded-full bg-slate-800 border border-white/10 overflow-hidden -translate-y-[200%] ml-[16%]"
+    >  
       <span
         className={`absolute top-1 left-1 h-8 w-1/2 rounded-full transition ${
           on ? "translate-x-[52px] bg-emerald-500" : "translate-x-0 bg-red-500"
         }`}
       />
+       
       <div className="relative z-10 flex h-full items-center justify-between px-3 text-xs font-bold text-white">
+       
         <span
           className={`${on ? "opacity-60" : "opacity-100"} cursor-pointer`}
           onClick={(e) => {
@@ -82,7 +85,10 @@ export default function AcceptMessages() {
         >
           ON
         </span>
+       
       </div>
     </button>
+    
+   </>
   );
 }
