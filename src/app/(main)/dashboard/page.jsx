@@ -68,9 +68,7 @@ export default function Dashboard() {
             <DashboardCard
               key={msg._id}
               message={msg}
-              onConfirmDelete={(m) => {
-                console.log("Delete message:", m._id); // your logic
-              }}
+             onDeleted={(id) => setMessages((prev) => prev.filter((x) => x._id !== id))}
             />
           ))}
         </div>

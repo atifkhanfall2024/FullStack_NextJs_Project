@@ -1,9 +1,28 @@
 "use client";
 import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-
-export default function DashboardCard({ message, onConfirmDelete }) {
+import axios from "axios";
+export default function DashboardCard({ message , onDeleted}) {
   const [open, setOpen] = useState(false);
+  const [IsRemove , setIsRemove] = useState()
+  //console.log(key);
+  const DeleteMsg = async(e)=>{
+     e.preventDefault()
+
+     try {
+      
+      const res = await axios.delete(`/api/delete-messages/${message?._id}` , {} , {withCredentials:true})
+
+        console.log("Delete SUccess");
+        
+        setOpen(false)
+        onDeleted(message?._id)
+       
+     } catch (error) {
+       console.log(error);
+     }
+
+  }
 
   return (
     <div className="relative w-full max-w-sm">
@@ -49,13 +68,11 @@ export default function DashboardCard({ message, onConfirmDelete }) {
               </button>
 
               <button
-                onClick={() => {
-                  setOpen(false);
-                  onConfirmDelete?.(message); // 👈 your logic will go here
-                }}
-                className="rounded-lg bg-red-500 px-3 py-1.5 text-xs text-white hover:bg-red-600"
-              >
+                 onClick={(DeleteMsg)}
+                className="rounded-lg bg-red-500 px-3 py-1.5 text-xs text-white hover:bg-red-600" >
                 Delete
+                {console.log(message?._id)}
+                  {/* {console.log(message?.id)} */}
               </button>
             </div>
           </div>

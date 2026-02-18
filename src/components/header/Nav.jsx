@@ -58,7 +58,7 @@ const HandleLogout = async(e)=>{
             Messages
           </a>
           <a
-            href="/discover"
+            href="/dashboard/discover"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-200 hover:bg-white/5 hover:text-white"
           >
             Discover
