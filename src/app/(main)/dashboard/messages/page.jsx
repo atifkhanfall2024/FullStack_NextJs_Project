@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import DashboardCard from "../../../components/getMessages/getMessages";
+import DashboardCard from "../../../../components/getMessages/getMessages";
 import axios from "axios";
-import AcceptMessages from '../../../components/acceptMessage/acpt'
 
 function Loader() {
   return (
@@ -29,7 +28,6 @@ function Loader() {
 export default function Dashboard() {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(true);
-
 
   useEffect(() => {
     let t;
@@ -62,13 +60,10 @@ export default function Dashboard() {
     );
   }
 
-
   return (
     <div className="w-full px-4 pt-[20%]">
-          <AcceptMessages/>
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap justify-center gap-4">
-
           {messages.slice(0, 5).map((msg) => (
             <DashboardCard
               key={msg._id}

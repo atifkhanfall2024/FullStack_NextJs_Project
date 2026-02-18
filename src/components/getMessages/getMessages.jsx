@@ -4,7 +4,7 @@ import { IoClose } from "react-icons/io5";
 import axios from "axios";
 export default function DashboardCard({ message , onDeleted}) {
   const [open, setOpen] = useState(false);
-  const [IsRemove , setIsRemove] = useState()
+  //const [IsRemove , setIsRemove] = useState()
   //console.log(key);
   const DeleteMsg = async(e)=>{
      e.preventDefault()
