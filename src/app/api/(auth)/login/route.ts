@@ -1,9 +1,9 @@
-import UserModel from '../../../../models/User'
-import { SigninSchema } from '../../../../Schemas/SigninSchema'
+import UserModel from '@/models/User'
+import { SigninSchema } from '@/Schemas/SigninSchema'
 import {NextRequest, NextResponse} from 'next/server'
-import { Compare } from '../../../../helpers/hashpass'
-import ConnectDb from '../../../../lib/db'
-import { SignIntoken } from '../../../../helpers/Signjwt_and_Verifytoken'
+import { Compare } from '@/helpers/hashpass'
+import ConnectDb from '@/lib/db'
+import { SignIntoken } from '@/helpers/Signjwt_and_Verifytoken'
 
 export async function POST(req:NextRequest){
 

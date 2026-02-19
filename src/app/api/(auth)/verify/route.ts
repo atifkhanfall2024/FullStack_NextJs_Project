@@ -1,9 +1,9 @@
-import { Compare } from "../../../../helpers/hashpass";
-import UserModel from "../../../../models/User";
-import { VerifySchema } from "../../../../Schemas/VerifySchema";
+import { Compare } from "@/helpers/hashpass";
+import UserModel from "@/models/User";
+import { VerifySchema } from "@/Schemas/VerifySchema";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
-import ConnectDb from "../../../../lib/db";
+import ConnectDb from "@/lib/db";
 export async function POST(req:NextRequest){
 
 try {

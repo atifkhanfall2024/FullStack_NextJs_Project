@@ -1,8 +1,8 @@
-import UserModel from "../../../../models/User";
-import { AuthUser } from "../../../../helpers/authuser";
+import UserModel from "@/models/User";
+import { AuthUser } from "@/helpers/authuser";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
-import ConnectDb from "../../../../lib/db";
+import ConnectDb from "@/lib/db";
 export async function GET(req:NextRequest){
 
     try {

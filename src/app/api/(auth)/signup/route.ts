@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { SignupSchema } from "../../../../Schemas/SignupSchema";
-import ConnectDb from "../../../../lib/db";
-import { resend } from "../../../../lib/resend";
-import UserModel from "../../../../models/User";
-import { HashOtp } from "../../../../helpers/hashpass";
-import { generate6DigitOtp, hashOtp } from "../../../../helpers/otp";
+import { SignupSchema } from "@/Schemas/SignupSchema";
+import ConnectDb from "@/lib/db";
+import { resend } from "@/lib/resend";
+import UserModel from "@/models/User";
+import { HashOtp } from "@/helpers/hashpass";
+import { generate6DigitOtp, hashOtp } from "@/helpers/otp";
 
 
 export async function POST(req:NextRequest){

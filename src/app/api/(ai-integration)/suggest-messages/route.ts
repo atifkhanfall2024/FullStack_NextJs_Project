@@ -1,5 +1,5 @@
-import { AuthUser } from "@/src/helpers/authuser";
-import ConnectDb from "@/src/lib/db";
+import { AuthUser } from "@/helpers/authuser";
+import ConnectDb from "@/lib/db";
 
 import { NextRequest, NextResponse } from "next/server";
 

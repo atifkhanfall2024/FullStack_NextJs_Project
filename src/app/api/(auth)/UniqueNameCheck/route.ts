@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { UserNames } from "../../../../Schemas/SignupSchema";
-import UserModel from "../../../../models/User";
-import ConnectDb from "../../../../lib/db";
+import { UserNames } from "@/Schemas/SignupSchema";
+import UserModel from "@/models/User";
+import ConnectDb from "@/lib/db";
 export async function GET(req:NextRequest){
 
     try{
