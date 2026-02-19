@@ -77,25 +77,25 @@ export default function Navbar() {
             href="/"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
-            Home
+           {User? 'Home' : ""}
           </a>
           <a
             href="/dashboard/messages"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
-            Messages
+           {User? 'Messages' : ""}
           </a>
           <a
             href="/dashboard/discover"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
-            Discover
+          {User? 'Discover' : ""}
           </a>
           <a
             href="/dashboard/about"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
-            About
+          {User? 'About' : ""}
           </a>
         </nav>
 
@@ -130,7 +130,7 @@ export default function Navbar() {
             onClick={HandleLogout}
             className="rounded-xl px-3 py-2 text-sm font-semibold text-slate-800 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
-            Logout
+           {User? 'Logout' : "Login"}
           </a>
 
           {/* Get started */}
@@ -168,7 +168,7 @@ export default function Navbar() {
       <div className="border-t border-black/10 bg-white/80 dark:border-white/10 dark:bg-slate-950/80 md:hidden">
         <nav className="mx-auto grid max-w-6xl gap-1 px-4 py-3 sm:px-6">
           <a
-            href="/"
+            href="/dashboard"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
             Home

@@ -34,14 +34,23 @@ try {
         }
     await ConnectDb()
 
-    const {message} = await req.json()
- if (!message || typeof message !== "string") {
-      return NextResponse.json({ message: "message is required" }, { status: 400 });
+    // const {message} = await req.json()
+//  if (!message || typeof message !== "string") {
+//       return NextResponse.json({ message: "message is required" }, { status: 400 });
     
-    }
+//     }
  const prompt = `
-Generate three friendly, open-ended questions for an anonymous social app.
-Return them as ONE string separated by '||'.
+Generate five friendly, open-ended questions for an anonymous social app.
+you are a prank messages app generate messages short not too long and behave like social messages app .
+Return them in proper array form upto five response one by one.
+Example:
+[
+"How you feel today"
+"second one" 
+"third one" 
+"fourth one"
+"fith one"
+]
 Avoid sensitive or personal topics. Keep the tone positive and engaging.
 `;
 
@@ -50,7 +59,7 @@ const response = await streamText({
     
     messages: [
          {role:"system" , content:prompt} ,
-        { role: "user", content: message }],
+        { role: "user", content: 'Gererate positive Message Also and you are like a prank messages app so be talk like messages app' }],
 
 })
 //console.log(response.toTextStreamResponse());
