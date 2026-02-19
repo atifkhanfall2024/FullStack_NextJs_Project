@@ -1,6 +1,6 @@
 import { AuthUser } from "@/helpers/authuser";
 import ConnectDb from "@/lib/db";
-import UserModel, { Messages } from "@/models/User";
+import UserModel, { Messages } from "@/models/user";
 
 import { NextRequest, NextResponse } from "next/server";
 

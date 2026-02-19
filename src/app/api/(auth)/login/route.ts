@@ -1,4 +1,4 @@
-import UserModel from '@/models/User'
+import UserModel from '@/models/user'
 import { SigninSchema } from '@/Schemas/SigninSchema'
 import {NextRequest, NextResponse} from 'next/server'
 import { Compare } from '@/helpers/hashpass'

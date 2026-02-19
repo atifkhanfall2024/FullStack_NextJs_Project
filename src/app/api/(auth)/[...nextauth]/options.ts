@@ -1,7 +1,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import ConnectDb from "@/lib/db";
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 import { Compare } from "@/helpers/hashpass";
 
 // here we define custom credantials for signup api by entering passward and emails

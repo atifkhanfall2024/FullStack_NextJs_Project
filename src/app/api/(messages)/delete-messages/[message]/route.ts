@@ -1,6 +1,6 @@
 import { AuthUser } from "@/helpers/authuser";
 import ConnectDb from "@/lib/db";
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
 

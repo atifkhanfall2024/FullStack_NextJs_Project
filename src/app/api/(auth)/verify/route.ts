@@ -1,5 +1,5 @@
 import { Compare } from "@/helpers/hashpass";
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 import { VerifySchema } from "@/Schemas/VerifySchema";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";

@@ -1,7 +1,7 @@
 import { AuthUser } from "@/helpers/authuser";
 import { NextRequest, NextResponse } from "next/server";
 import ConnectDb from "@/lib/db";
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 
 export async function POST(req:NextRequest) {
   

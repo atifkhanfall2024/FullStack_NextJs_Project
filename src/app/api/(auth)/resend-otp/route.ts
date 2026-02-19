@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import ConnectDb from "@/lib/db";
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 import { generate6DigitOtp, hashOtp } from "@/helpers/otp";
 import { resend } from "@/lib/resend";
 

@@ -1,4 +1,4 @@
-import UserModel from "@/models/User";
+import UserModel from "@/models/user";
 import { AuthUser } from "@/helpers/authuser";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
