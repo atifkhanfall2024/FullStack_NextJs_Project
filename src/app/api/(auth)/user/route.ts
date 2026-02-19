@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AuthUser } from "@/src/helpers/authuser";
+import { AuthUser } from "../../../../helpers/authuser";
 
 export async function GET(req: NextRequest) {
   const user = await AuthUser(req); // your helper reads token cookie + verifies

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import ConnectDb from "@/src/lib/db";
-import UserModel from "@/src/models/User";
-import { generate6DigitOtp, hashOtp } from "@/src/helpers/otp";
-import { resend } from "@/src/lib/resend";
+import ConnectDb from "../../../../lib/db";
+import UserModel from "../../../../models/User";
+import { generate6DigitOtp, hashOtp } from "../../../../helpers/otp";
+import { resend } from "../../../../lib/resend";
 
 export async function POST(req: NextRequest) {
   try {
