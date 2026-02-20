@@ -3,6 +3,7 @@ import ConnectDb from "@/lib/db";
 import UserModel from "@/models/user";
 import { generate6DigitOtp, hashOtp } from "@/helpers/otp";
 import { resend } from "@/lib/resend";
+import { SendEmail } from "@/lib/nodemailder";
 
 export async function POST(req: NextRequest) {
   try {
@@ -37,17 +38,19 @@ export async function POST(req: NextRequest) {
     await user.save();
 
     // Send OTP via email
-    await resend.emails.send({
-      from: process.env.EMAIL_FROM!,
-      to: email,
-      subject: "Your new verification code",
-      html: `
-        <h2>Verify your email</h2>
-        <p>Your 6-digit code is:</p>
-        <h1 style="letter-spacing: 6px;">${newOtp}</h1>
-        <p>This code expires in 10 minutes.</p>
-      `,
-    });
+    // await resend.emails.send({
+    //   from: process.env.EMAIL_FROM!,
+    //   to: email,
+    //   subject: "Your new verification code",
+    //   html: `
+    //     <h2>Verify your email</h2>
+    //     <p>Your 6-digit code is:</p>
+    //     <h1 style="letter-spacing: 6px;">${newOtp}</h1>
+    //     <p>This code expires in 10 minutes.</p>
+    //   `,
+    // });
+
+    await SendEmail(email , generate6DigitOtp)
 
     let message: string = "OTP Send to your email plz verify it in 2 minutes";
 

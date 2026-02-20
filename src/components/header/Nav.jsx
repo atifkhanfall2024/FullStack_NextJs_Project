@@ -74,7 +74,7 @@ export default function Navbar() {
         {/* Middle: Desktop Nav */}
         <nav className="hidden items-center gap-1 md:flex">
           <a
-            href="/"
+            href="/dashboard"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
            {User? 'Home' : ""}
@@ -135,7 +135,7 @@ export default function Navbar() {
 
           {/* Get started */}
           <a
-            href="/signup"
+            href="/"
             className="rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 active:opacity-90"
           >
             Get started
@@ -168,10 +168,16 @@ export default function Navbar() {
       <div className="border-t border-black/10 bg-white/80 dark:border-white/10 dark:bg-slate-950/80 md:hidden">
         <nav className="mx-auto grid max-w-6xl gap-1 px-4 py-3 sm:px-6">
           <a
-            href="/dashboard"
+            href="/"
             className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
           >
             Home
+          </a>
+            <a
+            href="/dashboard"
+            className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-black/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/5 dark:hover:text-white"
+          >
+            Dashboard
           </a>
           <a
             href="/messages"
@@ -194,7 +200,7 @@ export default function Navbar() {
 
           <div className="pt-2">
             <a
-              href="/signup"
+              href="/"
               className="block w-full rounded-xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-4 py-2 text-center text-sm font-semibold text-white shadow-sm hover:opacity-95"
             >
               Get started

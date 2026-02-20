@@ -106,6 +106,7 @@ const HandleSignup = async(e)=>{
             <div className="flex items-center justify-center p-6 sm:p-10">
               <div className="w-full max-w-md">
                 <div className="text-center lg:text-left">
+                   <Link href={'/'}><p className="-translate-y-5 text-xl"><FaArrowLeft/></p></Link>
                   <h1 className="text-3xl font-extrabold tracking-tight text-slate-900">
                     Join Mystery Message
                   </h1>

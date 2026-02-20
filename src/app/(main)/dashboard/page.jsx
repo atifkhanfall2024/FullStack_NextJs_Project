@@ -49,7 +49,7 @@ export default function Dashboard() {
       </div>
 
       {/* Suggest Messages Section */}
-      <div className="bg-white shadow rounded p-4">
+      <div className="bg-slate-200 shadow rounded p-4">
         <h2 className="text-2xl font-semibold mb-2">Suggest Messages</h2>
         <p className="text-gray-500 mb-4">
           Click the button below to get mysterious message suggestions from AI
