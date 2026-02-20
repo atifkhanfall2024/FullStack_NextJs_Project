@@ -7,7 +7,7 @@ export const SendEmail = async (email, otp) => {
       port: 587,       // use TLS port
       secure: false,   // false for TLS
       auth: {
-        user: process.env.App_EMAIL,     // Gmail
+        user: process.env.App_Email,     // Gmail
         pass: process.env.App_Passward, // App Password
       },
       tls: {
@@ -16,7 +16,7 @@ export const SendEmail = async (email, otp) => {
     });
 
     const mailOptions = {
-      from: `"Mystery Messages" <${process.env.App_EMAIL}>`,
+      from: `"Mystery Messages" <${process.env.App_Email}>`,
       to: email,
       subject: "Your OTP Code for Mystery Messages",
       html: `
