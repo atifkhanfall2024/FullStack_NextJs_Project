@@ -50,7 +50,7 @@ export async function POST(req: NextRequest) {
     //   `,
     // });
 
-    await SendEmail(email , generate6DigitOtp)
+    await SendEmail(email , newOtp)
 
     let message: string = "OTP Send to your email plz verify it in 2 minutes";
 
